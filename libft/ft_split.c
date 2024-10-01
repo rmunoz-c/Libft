@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:13:33 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 17:09:36 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:52:41 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ static char	**ft_split_clean(char **array, size_t len)
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	char	**array;
+	size_t		i;
+	size_t		j;
+	char		**array;
+	const char	*str;
 
 	if (!s)
 		return (NULL);
@@ -91,7 +92,8 @@ char	**ft_split(char const *s, char c)
 	{
 		if (s[i] != c)
 		{
-			array[j++] = ft_copy_sub(&s[i], ft_len_sub(s, &i, c));
+			str = &s[i];
+			array[j++] = ft_copy_sub(str, ft_len_sub(s, &i, c));
 			if (!array[j - 1])
 				return (ft_split_clean(array, j - 1));
 		}
@@ -101,16 +103,16 @@ char	**ft_split(char const *s, char c)
 	return (array);
 }
 
-/*#include <stdio.h>
-
-int	main(void)
+/*int	main(void)
 {
 	char	*str = "aholaaaaaaaaaaqueaaaaaaaaaaaaaaaaatalaaaaaaaaaa";
 	char	c = 'a';
 	char	**result;
 	size_t	i = 0;
+	(void) str;
+	(void) c;
 
-	result = ft_split(str, c);
+	result = ft_split("hello!", ' ');
 	printf("Puntero result: %p\n", result);
 	while (result[i])
 	{
@@ -118,6 +120,8 @@ int	main(void)
 		free(result[i]);
 		i ++;
 	}
+	printf("Res %lu: \"%s\", en dir: \"%p\"\n", i, result[i], result[i]);
+
 	if (result)
 	{
 		printf("El cerrado está en dirección: \"%p\"\n", result[i]);
