@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 20:59:36 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/01 21:11:25 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:14:42 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
 	new_list = NULL;
 	while (lst)
 	{
-		new_node = ft_lstnew(f(lst->content));
+		new_node = ft_lstnew(NULL);
 		if (!new_node)
 		{
 			ft_lstclear(&new_list, del);
 			return (NULL);
 		}
+		new_node->content = f(lst->content);
 		ft_lstadd_back(&new_list, new_node);
 		lst = lst->next;
 	}
