@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:30:29 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:54:55 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t	count;
 
-	if (!dest || !src)
-		return (NULL);
 	if ((unsigned char *)src < (unsigned char *)dest)
 	{
 		count = n;

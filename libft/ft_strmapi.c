@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:41:40 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:41:21 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	len = ft_strlen(s);
 	str = (char *)malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
 	count = 0;
 	while (count < len)
 	{

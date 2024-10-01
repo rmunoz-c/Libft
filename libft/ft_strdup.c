@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:38:36 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:48:59 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strdup(const char *s)
 	char	*str;
 	int		len;
 
-	if (!s)
-		return (NULL);
 	len = ft_strlen(s) + 1;
 	str = (char *)malloc(len);
 	if (!str)
@@ -29,7 +27,7 @@ char	*ft_strdup(const char *s)
 
 /*int	main(void)
 {
-	const char *og = "Hola que tal?";
+	const char *og = NULL;
 	char *dup;
 
 	dup = ft_strdup(og);

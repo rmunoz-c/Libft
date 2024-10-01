@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:44:39 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:54:36 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char		*ptr;
 	const unsigned char	*ptr2;
 
-	if (!dest || !src)
-		return (NULL);
 	count = 0;
 	ptr = (unsigned char *)dest;
 	ptr2 = (const unsigned char *)src;
@@ -33,10 +31,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 /*int	main(void)
 {
-	char src[] = "EstoEsUnTestDeMemCPY";
-	char dest[] = "Hola que tal?";
+	char *src = NULL;
+	char *dest = NULL;
 	
-	ft_memcpy(dest, src, 19);
+	ft_memcpy(dest, src, 17);
 	
 	write(1, src, 19);
 	return (0);

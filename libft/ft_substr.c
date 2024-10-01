@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:18:43 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:19:59 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= ft_strlen(s))
 		len = 0;
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
 	str = (char *) malloc((len + 1) * sizeof(char));
 	count = 0;
 	if (!str)
@@ -41,7 +41,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char *result;
 	char *str = "Hola que tal?";
 
-	result = ft_substr (str, 5, 3);
+	result = ft_substr (str, 656416253, 0);
 	printf("La subcadena es: %s\n", result);
 	free (result);
 	return (0);

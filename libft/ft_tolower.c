@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:56:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 12:59:29 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:41:44 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,20 @@ int	ft_tolower(int c)
 		c = c + 32;
 		return (c);
 	}
-	return (0);
+	return (c);
 }
+/*int main(void)
+{
+	int	i;
+	int c;
+	
+	i = 0;
+    while (i <= 47)
+    {
+        c = ft_tolower(i);
+		printf("%d\n", c);
+        i++;
+    }
+	
+	return (0);
+}*/

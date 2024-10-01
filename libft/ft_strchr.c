@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:50:08 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:11:48 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,25 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)&s[count]);
 		count++;
 	}
-	if (c == '\0')
+	if ((char)c == '\0')
 		return ((char *)&s[count]);
-	return (0);
+	return (NULL);
 }
 
 /*int	main(void)
 {
-	char str[] = "Hola que tal?";
+	char str[] = "teste";
 	char *result;
 
-	result = ft_strchr(str, 'q');
+	printf("%p\n", str);
+	result = ft_strchr(str, 1024);
 
-	if (result)
-		write(1, result, ft_strlen(result));
-	else
-		write(1, "No encontrado", 14);
+	printf("%p\n", result);
+
+	char *result2;
+	result2 = strchr(str, 1024);
+
+	printf("%p", result2);
+
 	return (0);
 }*/
