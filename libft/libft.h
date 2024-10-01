@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 14:11:50 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/01 16:35:46 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:17:09 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <ctype.h>
 # include <stddef.h>
-# include <stdio.h>
+//# include <stdio.h>
 
 typedef struct s_list
 {
