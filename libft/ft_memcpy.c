@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:44:39 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/01 17:25:38 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:28:08 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char *src = NULL;
 	char *dest = NULL;
@@ -40,4 +40,4 @@ int	main(void)
 	
 	write(1, src, 19);
 	return (0);
-}
+}*/
