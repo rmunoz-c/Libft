@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 20:59:36 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 21:44:22 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:08:44 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*static void *ft_dup(void *content)
+static void *ft_dup(void *content)
 {
     return (ft_strdup((char *)content));
-}*/
+}
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
 {
 	t_list	*new_list;
 	t_list	*new_node;
 
+	if (lst == NULL || !f || !del)
+		return (NULL);
 	new_list = NULL;
 	while (lst)
 	{
@@ -37,7 +39,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
 	return (new_list);
 }
 
-/*int main(void)
+int main(void)
 {
 	t_list *list = NULL;
 
@@ -58,4 +60,4 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
     ft_lstclear(&new_list, &free);
 
 	return (0);
-}*/
+}
