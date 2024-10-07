@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:22:16 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:20:52 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*array;
+	void	*buffer;
 
-	if (!(size == 0 && nmemb > SIZE_MAX / size))
-	{
-		array = (void *) malloc(size * nmemb);
-		if (!array)
-			return (NULL);
-		return (ft_memset(array, 0, size * nmemb));
-	}
-	return (NULL);
+	buffer = (void *)malloc(size * nmemb);
+	if (!buffer)
+		return (NULL);
+	ft_bzero(buffer, size * nmemb);
+	return (buffer);
 }
 
 /*int	main(void)
