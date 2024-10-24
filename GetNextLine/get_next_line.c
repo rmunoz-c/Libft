@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:21:10 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/24 18:15:05 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:49:55 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,9 @@ char	*get_next_line(int fd)
     }
 
     char *line;
-	int	i = 5;
-    while (i > 0) 
-	{
-		line = get_next_line(fd);
+    while ((line = get_next_line(fd)) != NULL) {
         printf("%s", line);
         free(line);
-		i --;
     }
 
     close(fd);

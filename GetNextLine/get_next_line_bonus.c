@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/24 18:40:04 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:37:21 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,10 @@ char	*get_next_line(int fd)
         perror("Error opening files");
         return 1;
     }
-    char *line1;
-    char *line2;
-	int	i = 5;
-    while (i > 0) 
+    char *line1 = get_next_line(fd1);
+    char *line2 = get_next_line(fd2);
+    while ((line1) != NULL || (line2) != NULL) 
 	{
-		line1 = get_next_line(fd1);
-		line2 = get_next_line(fd2);
         if (line1) {
             printf("FD1: %s", line1);
             free(line1);
@@ -141,10 +138,11 @@ char	*get_next_line(int fd)
             printf("FD2: %s", line2);
             free(line2);
         }
-		i--;
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
     }
 
     close(fd1);
     close(fd2);
-    return (0);
+    return 0;
 }*/
