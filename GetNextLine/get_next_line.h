@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:20:57 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/22 17:38:17 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:14:54 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
+//# include <stdio.h>
 
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
