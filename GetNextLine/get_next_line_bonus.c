@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/22 17:38:02 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:48:25 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*join_stash(char *stash, char *buffer)
 	return (temp);
 }
 
-static char	*read_n_store(int fd, char *stash, ssize_t	*nbytes)
+static char	*read_n_store(int fd, char *stash, ssize_t *nbytes)
 {
 	char	*buffer;
 
