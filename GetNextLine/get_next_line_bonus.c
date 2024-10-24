@@ -6,18 +6,18 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/21 15:59:34 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:38:02 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char *join_stash(char *stash, char *buffer)
+static char	*join_stash(char *stash, char *buffer)
 {
 	char	*temp;
 
-	if(!stash)
-		return ft_strdup(buffer);
+	if (!stash)
+		return (ft_strdup(buffer));
 	temp = ft_strjoin(stash, buffer);
 	if (!temp)
 	{
@@ -35,12 +35,13 @@ static char	*read_n_store(int fd, char *stash, ssize_t	*nbytes)
 	buffer = (char *)malloc((BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	while ((*nbytes = read(fd, buffer, BUFFER_SIZE)) > 0)
+	nbytes = read(fd, buffer, BUFFER_SIZE);
+	while (*nbytes > 0)
 	{
 		buffer[*nbytes] = '\0';
 		stash = join_stash(stash, buffer);
 		if (ft_strchr(stash, '\n'))
-			break;
+			break ;
 	}
 	if (nbytes < 0)
 	{
@@ -61,7 +62,7 @@ static char	*get_line(char *stash)
 	if (!stash)
 		return (NULL);
 	ptr = ft_strchr(stash, '\n');
-	if(ptr)
+	if (ptr)
 	{
 		len = (ptr + 1) - stash;
 		substr = ft_substr(stash, 0, len);
@@ -83,32 +84,31 @@ static char	*update_stash(char *stash)
 	if (!stash)
 		return (NULL);
 	ptr = ft_strchr(stash, '\n');
-	if(ptr)
+	if (ptr)
 	{
 		len = ft_strlen(ptr + 1);
 		new_stash = ft_substr(ptr + 1, 0, len);
 	}
 	else
 		new_stash = NULL;
-	
 	free(stash);
-	return (new_stash);	
+	return (new_stash);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *stash[MAX_FD];
-	char *line;
-	ssize_t	nbytes;
+	static char	*stash[MAX_FD];
+	char		*line;
+	ssize_t		nbytes;
 
 	stash[fd] = read_n_store(fd, stash[fd], &nbytes);
 	if (fd < 0 || BUFFER_SIZE <= 0 || nbytes < 0)
-    {
-        free(stash[fd]);
-        stash[fd] = NULL;
-        return (NULL);
-    }
-	if(!stash[fd])
+	{
+		free(stash[fd]);
+		stash[fd] = NULL;
+		return (NULL);
+	}
+	if (!stash[fd])
 		return (NULL);
 	line = get_line(stash[fd]);
 	if (!line)

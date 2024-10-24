@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:19:28 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/21 13:50:17 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:23:04 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[count]);
 	return (NULL);
 }
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	count;
@@ -36,6 +37,7 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
@@ -59,6 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[count] = '\0';
 	return (str);
 }
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -82,6 +85,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (str);
 }
+
 char	*ft_strdup(const char *s)
 {
 	char	*str;

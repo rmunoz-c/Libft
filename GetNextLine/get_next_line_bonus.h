@@ -6,15 +6,15 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:49:55 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/21 16:05:42 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:32:56 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 # define MAX_FD 1024
 
 # include <stdlib.h>
@@ -28,6 +28,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
-
 
 #endif
