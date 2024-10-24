@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/24 16:48:25 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:40:04 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ static char	*read_n_store(int fd, char *stash, ssize_t *nbytes)
 	buffer = (char *)malloc((BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	nbytes = read(fd, buffer, BUFFER_SIZE);
+	*nbytes = read(fd, buffer, BUFFER_SIZE);
 	while (*nbytes > 0)
 	{
 		buffer[*nbytes] = '\0';
 		stash = join_stash(stash, buffer);
 		if (ft_strchr(stash, '\n'))
 			break ;
+		*nbytes = read(fd, buffer, BUFFER_SIZE);
 	}
-	if (nbytes < 0)
+	if (*nbytes < 0)
 	{
 		free (stash);
 		free(buffer);
@@ -125,10 +126,13 @@ char	*get_next_line(int fd)
         perror("Error opening files");
         return 1;
     }
-    char *line1 = get_next_line(fd1);
-    char *line2 = get_next_line(fd2);
-    while ((line1) != NULL || (line2) != NULL) 
+    char *line1;
+    char *line2;
+	int	i = 5;
+    while (i > 0) 
 	{
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
         if (line1) {
             printf("FD1: %s", line1);
             free(line1);
@@ -137,11 +141,10 @@ char	*get_next_line(int fd)
             printf("FD2: %s", line2);
             free(line2);
         }
-		line1 = get_next_line(fd1);
-		line2 = get_next_line(fd2);
+		i--;
     }
 
     close(fd1);
     close(fd2);
-    return 0;
+    return (0);
 }*/
