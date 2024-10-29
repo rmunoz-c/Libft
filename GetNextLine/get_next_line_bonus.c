@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/24 18:37:21 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:07:00 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*read_n_store(int fd, char *stash, ssize_t *nbytes)
 {
 	char	*buffer;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1));
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	*nbytes = read(fd, buffer, BUFFER_SIZE);
@@ -40,17 +40,16 @@ static char	*read_n_store(int fd, char *stash, ssize_t *nbytes)
 	{
 		buffer[*nbytes] = '\0';
 		stash = join_stash(stash, buffer);
-		if (ft_strchr(stash, '\n'))
+		if (!stash || ft_strchr(stash, '\n'))
 			break ;
 		*nbytes = read(fd, buffer, BUFFER_SIZE);
 	}
+	free (buffer);
 	if (*nbytes < 0)
 	{
 		free (stash);
-		free(buffer);
 		return (NULL);
 	}
-	free (buffer);
 	return (stash);
 }
 
@@ -60,7 +59,7 @@ static char	*get_line(char *stash)
 	char	*substr;
 	size_t	len;
 
-	if (!stash)
+	if (!stash || !*stash)
 		return (NULL);
 	ptr = ft_strchr(stash, '\n');
 	if (ptr)
@@ -70,9 +69,11 @@ static char	*get_line(char *stash)
 	}
 	else
 	{
-		len = ft_strlen(stash) + 1;
+		len = ft_strlen(stash);
 		substr = ft_substr(stash, 0, len);
 	}
+	if (!substr)
+			return (NULL);
 	return (substr);
 }
 
@@ -102,8 +103,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		nbytes;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stash[fd] = read_n_store(fd, stash[fd], &nbytes);
-	if (fd < 0 || BUFFER_SIZE <= 0 || nbytes < 0)
+	if (nbytes < 0 || !stash[fd])
 	{
 		free(stash[fd]);
 		stash[fd] = NULL;
