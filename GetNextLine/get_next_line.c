@@ -6,11 +6,10 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:21:10 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/29 17:12:22 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:19:45 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 
 static char	*join_stash(char *stash, char *buffer)
 {
@@ -69,7 +68,7 @@ static char	*get_line(char *stash)
 	}
 	else
 	{
-		len = ft_strlen(stash);
+		len = ft_strlen(stash) + 1;
 		substr = ft_substr(stash, 0, len);
 	}
 	if (!substr)
@@ -112,11 +111,13 @@ char	*get_next_line(int fd)
 		stash = NULL;
 		return (NULL);
 	}
-	if (!stash)
-		return (NULL);
 	line = get_line(stash);
 	if (!line)
+	{
+		free(stash);
+		stash = NULL;
 		return (NULL);
+	}
 	stash = update_stash(stash);
 	return (line);
 }
