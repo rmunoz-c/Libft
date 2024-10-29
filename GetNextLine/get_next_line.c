@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:21:10 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/29 17:03:34 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:12:22 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*get_line(char *stash)
 		substr = ft_substr(stash, 0, len);
 	}
 	if (!substr)
-			return (NULL);
+		return (NULL);
 	return (substr);
 }
 

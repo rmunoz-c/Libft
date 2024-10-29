@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:52:56 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/29 17:07:00 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:16:01 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static char	*get_line(char *stash)
 	}
 	else
 	{
-		len = ft_strlen(stash);
+		len = ft_strlen(stash) + 1;
 		substr = ft_substr(stash, 0, len);
 	}
 	if (!substr)
-			return (NULL);
+		return (NULL);
 	return (substr);
 }
 
@@ -112,11 +112,13 @@ char	*get_next_line(int fd)
 		stash[fd] = NULL;
 		return (NULL);
 	}
-	if (!stash[fd])
-		return (NULL);
 	line = get_line(stash[fd]);
 	if (!line)
+	{
+		free(stash[fd]);
+		stash[fd] = NULL;
 		return (NULL);
+	}
 	stash[fd] = update_stash(stash[fd]);
 	return (line);
 }
