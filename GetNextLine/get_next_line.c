@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:21:10 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/24 16:49:55 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:22:27 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ static char	*read_n_store(int fd, char *stash, ssize_t *nbytes)
 			break ;
 		*nbytes = read(fd, buffer, BUFFER_SIZE);
 	}
+	free (buffer);
 	if (*nbytes < 0)
 	{
 		free (stash);
-		free(buffer);
 		return (NULL);
 	}
-	free (buffer);
 	return (stash);
 }
 
@@ -73,6 +72,8 @@ static char	*get_line(char *stash)
 		len = ft_strlen(stash) + 1;
 		substr = ft_substr(stash, 0, len);
 	}
+	if (!substr)
+			return (NULL);
 	return (substr);
 }
 
@@ -102,10 +103,11 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		nbytes;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stash = read_n_store(fd, stash, &nbytes);
-	if (fd < 0 || BUFFER_SIZE <= 0 || nbytes < 0)
+	if (nbytes < 0)
 	{
-		free (stash);
 		stash = NULL;
 		return (NULL);
 	}
