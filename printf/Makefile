@@ -6,14 +6,13 @@
 #    By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 19:18:42 by rmunoz-c          #+#    #+#              #
-#    Updated: 2024/10/30 20:28:33 by rmunoz-c         ###   ########.fr        #
+#    Updated: 2024/10/30 20:32:25 by rmunoz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= libftprintf.a
 
 LIBFT_DIR= libft
-LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_OBJ = $(LIBFT_DIR)/*.o
 
 AR= ar -rcs
@@ -30,11 +29,11 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT_OBJ)
 	$(AR) $(NAME) $(OBJ) $(LIBFT_OBJ)
 	$(RN) $(NAME)
 
-$(LIBFT):
+$(LIBFT_OBJ):
 	$(MAKE) -C $(LIBFT_DIR)
 
 %.o: %.c ft_printf.h libft.h
