@@ -6,7 +6,7 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:22:35 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/10/30 17:15:05 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:01:13 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,9 @@ int	ft_put_hex_ptr(unsigned long long int n, const char format, int is_ptr)
 		printed_chars += ft_put_hex_ptr(n / 16, format, 0);
 	if (n % 16 <= 9)
 		printed_chars += ft_putchar((n % 16 + '0'));
-	else
-	{
-		if (format == 'x' || is_ptr)
+	else if (format == 'x' || is_ptr)
 			printed_chars += ft_putchar((n % 16 - 10 + 'a'));
-		if (format == 'X')
+	else if (format == 'X')
 			printed_chars += ft_putchar((n % 16 - 10 + 'A'));
-	}
 	return (printed_chars);
 }
