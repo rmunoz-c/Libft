@@ -6,7 +6,7 @@
 #    By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 20:32:53 by rmunoz-c          #+#    #+#              #
-#    Updated: 2024/10/01 19:32:46 by rmunoz-c         ###   ########.fr        #
+#    Updated: 2024/10/31 15:48:47 by rmunoz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ AR= ar -rcs
 CC= cc
 CFLAGS= -Wall -Werror -Wextra
 
-SRC=		ft_bzero.c \
+SRC	=		ft_bzero.c \
 			ft_strchr.c \
 			ft_memcmp.c \
 			ft_memmove.c \
@@ -51,8 +51,7 @@ SRC=		ft_bzero.c \
 			ft_toupper.c \
 			ft_tolower.c \
 			ft_split.c \
-			
-SRC_BONUS=	ft_lstnew_bonus.c \
+			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c \
@@ -63,26 +62,22 @@ SRC_BONUS=	ft_lstnew_bonus.c \
 			ft_lstmap_bonus.c \
 
 OBJ= $(SRC:.c=.o) 
-OBJ_BONUS= $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) libft.h
 	$(AR) $(NAME) $(OBJ)
 
-%.o: %.c
+%.o: %.c libft.h
 	$(CC) $(CFLAGS) -o $@ $< -c
 
 clean:
-	rm -f $(OBJ) $(OBJ_BONUS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bonus:
-	@make SRC="$(SRC) $(SRC_BONUS)"
 
 .DEFAULT_GOAL: all
 

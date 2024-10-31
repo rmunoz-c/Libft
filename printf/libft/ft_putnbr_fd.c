@@ -6,32 +6,43 @@
 /*   By: rmunoz-c <rmunoz-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:05:13 by rmunoz-c          #+#    #+#             */
-/*   Updated: 2024/09/30 15:44:41 by rmunoz-c         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:08:37 by rmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+size_t	ft_putnbr_fd(long n, int fd)
 {
-	if (n == -2147483648)
+	size_t	i;
+
+	i = 0;
+	if (n == (-__LONG_MAX__) - 1)
 	{
 		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		n = 147483648;
+		ft_putchar_fd('9', fd);
+		i += 2;
+		n = 223372036854775808;
 	}
 	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
+		i ++;
 		n = -n;
 	}
 	if (n >= 10)
-		ft_putnbr_fd(n / 10, fd);
+	{
+		i += ft_putnbr_fd(n / 10, fd);
+	}
 	ft_putchar_fd((n % 10) + '0', fd);
+	return (i + 1);
 }
 
-/*int	main(void)
+/*#include <stdio.h>
+
+int	main(void)
 {
-	ft_putnbr_fd(-123, 1);
+	long i = -1;
+	printf("\n%lu\n", ft_putnbr_fd(i, 1));
 	return (0);
 }*/
