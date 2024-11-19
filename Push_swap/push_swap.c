@@ -55,8 +55,8 @@ int	main(int argc, char **argv)
 			return (ft_putstr_fd("Crack, me has pasao un solo número", 1), 0);
 		ft_error("Error", 1);
 	}
-	init_push_swap(&stack_a, &stack_b, c, count);
-	sort(&stack_a, &stack_b, c, count);
+	init_push_swap(&stack_a, &stack_b, c, len);
+	sort(&stack_a, &stack_b, c, len);
 	free(c);
 	free_stack(&stack_a);
 	return (0);
