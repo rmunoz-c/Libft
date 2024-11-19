@@ -28,7 +28,7 @@ void	swap_both(t_stack *stack_a, t_stack *stack_b)
 
 void	reverese_rotate_both(t_stack *stack_a, t_stack *stack_b)
 {
-	reverese_rotate(stack_a, 'a', FALSE);
+	reverse_rotate(stack_a, 'a', FALSE);
 	reverse_rotate(stack_b, 'b', FALSE);
 	write(1, "rrr\n", 4);
 }

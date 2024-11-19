@@ -51,6 +51,13 @@ SRC	=		ft_bzero.c \
 			ft_toupper.c \
 			ft_tolower.c \
 			ft_split.c \
+			ft_sqrt.c \
+			ft_error.c \
+			ft_arraylen.c \
+			ft_atoll.c \
+			ft_free_array.c \
+			ft_strcmp.c \
+			ft_quicksort \
 			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \

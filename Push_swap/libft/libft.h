@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <ctype.h>
 # include <stddef.h>
+# include <limits.h>
 
 typedef int			t_bool;
 # define TRUE 1
@@ -58,6 +59,14 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_split(char const *s, char c);
+int		ft_sqrt(int n);
+void	ft_error(char *msg, t_bool b);
+long	ft_atoll(const char *nptr);
+void	ft_free_array(char **array);
+int		ft_arraylen(char **a);
+int		ft_strcmp(char *s1, char *s2);
+void	ft_quicksort(int *array, int low, int high);
+int		ft_index(int n, int *array);
 
 typedef struct s_list
 {

@@ -14,15 +14,15 @@
 
 void	push_stack(t_stack *stack, int index, int data)
 {
-	t_node	*tmp;
+	t_node	*temp;
 
-	tmp = (t_node *)malloc(sizeof(t_node));
-	if (!tmp)
+	temp = (t_node *)malloc(sizeof(t_node));
+	if (!temp)
 		return ;
-	tmp->data = data;
-	tmp->s_index = index;
-	tmp->next = stack->head;
-	stack->head = tmp;
+	temp->data = data;
+	temp->s_index = index;
+	temp->next = stack->head;
+	stack->head = temp;
 	stack->size++;
 }
 
