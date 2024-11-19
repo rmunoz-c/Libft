@@ -86,7 +86,7 @@ int	is_already_sorted(t_stack *stack)
 	{
 		if (temp->data > temp->next->data)
 			return (0);
-		temp->next;
+		temp = temp->next;
 	}
 	return (1);
 }
