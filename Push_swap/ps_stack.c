@@ -32,7 +32,7 @@ int	del_stack(t_stack *stack)
 	int		data;
 
 	if (!stack->head)
-		exit(1);
+		exit (1);
 	first = stack->head;
 	data = first->data;
 	stack->head = first->next;

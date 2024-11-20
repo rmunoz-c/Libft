@@ -43,18 +43,18 @@ void	swap_both(t_stack *stack_a, t_stack *stack_b);
 void	reverese_rotate_both(t_stack *stack_a, t_stack *stack_b);
 
 /*ps_sort.c*/
-void	push_b(t_stack *stack_a, t_stack *stack_b, int mid);
-void	max_index_sort(t_stack *stack_a);
-void	back_a(t_stack *stack_a, t_stack *stack_b);
-void	turkish(t_stack *stack_a, t_stack *stack_b);
-void	sort(t_stack *stack_a, t_stack *stack_b, int *c, int lenght);
+int		is_rot_sort(t_stack *stack, int min_s_index);
+void	simple_sort(t_stack *stack, int length);
+void	s_insertion_sort(t_stack *stack_a, t_stack *stack_b, int length);
+void	k_sort1(t_stack *stack_a, t_stack *stack_b, int length);
+void	k_sort2(t_stack *stack_a, t_stack *stack_b, int length);
 
 /*ps_sort2.c*/
-int		find_max(t_stack *stack);
-int		get_position(t_stack *stack, int num);
-void	move_to_top(t_stack *stack, int num);
-int		is_already_sorted(t_stack *stack);
+int		get_min_index(t_stack *stack);
+int		count_r(t_node *stack, int index);
+int		is_sorted(t_stack *stack);
 void	free_stack(t_stack *stack);
+void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length);
 
 /*ft_parsing.c*/
 int		check_digits(int ac, char **av);

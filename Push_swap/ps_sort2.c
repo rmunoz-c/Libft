@@ -12,81 +12,45 @@
 
 #include "push_swap.h"
 
-int	find_max(t_stack *stack)
-{
-	int		max;
-	t_node	*current;
-
-	if (stack == NULL || stack->head == NULL)
-		ft_error("Error\n", TRUE);
-	current = stack->head;
-	max = current->s_index;
-	while (current != NULL)
-	{
-		if (current->s_index > max)
-			max = current->s_index;
-		current = current->next;
-	}
-	return (max);
-}
-
-int	get_position(t_stack *stack, int num)
+int	get_min_index(t_stack *stack)
 {
 	t_node	*current;
-	int		position;
+	int		min_index;
 
-	if (stack == NULL || stack->head == NULL)
-		ft_error("Error\n", TRUE);
 	current = stack->head;
-	position = 0;
-	while (current != NULL)
+	min_index = current->s_index;
+	while (current->next)
 	{
-		if (current->data == num)
-			return (position);
 		current = current->next;
-		position++;
+		if (current->s_index < min_index)
+			min_index = current->s_index;
 	}
-	return (-1);
+	return (min_index);
 }
 
-void	move_to_top(t_stack *stack, int num)
+int	count_r(t_node *stack, int index)
 {
-	t_node	*current;
-	t_node	*previous;
+	int	counter;
 
-	if (stack == NULL || stack->head == NULL)
-		ft_error("Error\n", TRUE);
-	current = stack->head;
-	previous = NULL;
-	if (current != NULL && current->data == num)
-		return ;
-	while (current != NULL && current->data != num)
+	counter = 0;
+	while (stack && stack->s_index != index)
 	{
-		previous = current;
-		current = current->next;
+		stack = stack->next;
+		counter++;
 	}
-	if (current == NULL)
-		ft_error("Error\n", TRUE);
-	if (previous != NULL)
-	{
-		previous->next = current->next;
-		current->next = stack->head;
-		stack->head = current;
-	}
+	return (counter);
 }
 
-int	is_already_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
-	t_node	*temp;
+	t_node	*tmp;
 
-	if (stack == NULL || stack->head == NULL || stack->head->next == NULL)
-		return (1);
-	temp = stack->head;
-	while (temp->next)
+	tmp = stack->head;
+	while (tmp->next)
 	{
-		if (temp->data > temp->next->data)
+		if (tmp->data > tmp->next->data)
 			return (0);
-		temp = temp->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }
@@ -95,4 +59,27 @@ void	free_stack(t_stack *stack)
 {
 	while (stack)
 		del_stack(stack);
+}
+
+void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
+{
+	if (is_sorted(stack_a))
+	{
+		free(numbers);
+		free_stack(stack_a);
+		ft_error("", 1);
+	}
+	else if (length == 2)
+		swap(stack_a, 'a', TRUE);
+	else if (length == 3)
+		simple_sort(stack_a, length);
+	else if (length <= 7)
+		s_insertion_sort(stack_a, stack_b, length);
+	else if (length > 7)
+	{
+		k_sort1(stack_a, stack_b, length);
+		k_sort2(stack_a, stack_b, length);
+	}
+	else
+		ft_error("", 1);
 }

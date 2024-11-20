@@ -48,15 +48,15 @@ int	main(int argc, char **argv)
 	argv++;
 	count = check_digits(argc, argv);
 	c = parse_input(argc, argv, count, &len);
-	if (count < 2 || check_repeated(c, len))
+	if (count < 2 || check_repeated(c, count))
 	{
 		free (c);
-		if (count == 1)
-			return (ft_putstr_fd("Crack, me has pasao un solo número", 1), 0);
-		ft_error("Error", 1);
+		if (count == 1 || count == 0)
+			return (ft_putstr_fd("", 1), 0);
+		ft_error("Error\n", 1);
 	}
-	init_push_swap(&stack_a, &stack_b, c, len);
-	sort(&stack_a, &stack_b, c, len);
+	init_push_swap(&stack_a, &stack_b, c, count);
+	sort(&stack_a, &stack_b, c, count);
 	free(c);
 	free_stack(&stack_a);
 	return (0);

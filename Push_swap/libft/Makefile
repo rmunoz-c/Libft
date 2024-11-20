@@ -57,7 +57,8 @@ SRC	=		ft_bzero.c \
 			ft_atoll.c \
 			ft_free_array.c \
 			ft_strcmp.c \
-			ft_quicksort \
+			ft_quicksort.c \
+			ft_index.c \
 			ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstsize_bonus.c \

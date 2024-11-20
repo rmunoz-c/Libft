@@ -12,75 +12,132 @@
 
 #include "push_swap.h"
 
-void	push_b(t_stack *stack_a, t_stack *stack_b, int mid)
+int	is_rot_sort(t_stack *stack, int min_s_index)
 {
-	while (stack_a->size > 3)
+	int	a;
+	int	b;
+	int	c;
+
+	(void)min_s_index;
+	a = stack->head->data;
+	b = stack->head->next->data;
+	c = stack->head->next->next->data;
+	if (a < b && b < c)
+		return (1);
+	if (b < c && a > c)
+		return (1);
+	if (c < a && a < b)
+		return (1);
+	return (0);
+}
+
+void	simple_sort(t_stack *stack, int length)
+{
+	int		min_s_index;
+	int		r;
+
+	if (is_sorted(stack))
+		return ;
+	min_s_index = get_min_index(stack);
+	r = count_r(stack->head, min_s_index);
+	if (is_rot_sort(stack, min_s_index))
 	{
-		if (stack_a->head->s_index <= mid)
-		{
-			push(stack_a, stack_b, 'b', TRUE);
-		}
+		if (r < length - r)
+			rotate(stack, 'a', TRUE);
 		else
-		{
-			rotate(stack_a, 'a', TRUE);
-		}
-	}
-}
-
-void	max_index_sort(t_stack *stack_a)
-{
-	int	max;
-
-	max = find_max(stack_a);
-	if (stack_a->head->s_index == max)
-		rotate(stack_a, 'a', TRUE);
-	else if (stack_a->head->next->s_index == max)
-		swap(stack_a, 'a', TRUE);
-	if (stack_a->head->s_index > stack_a->head->next->s_index)
-		swap(stack_a, 'a', TRUE);
-}
-
-void	back_a(t_stack *stack_a, t_stack *stack_b)
-{
-	int	max;
-
-	while (stack_b->size > 0)
-	{
-		max = find_max(stack_b);
-		move_to_top(stack_b, max);
-		push (stack_a, stack_b, 'a', TRUE);
-	}
-}
-
-void	turkish(t_stack *stack_a, t_stack *stack_b)
-{
-	int	total;
-	int	mid;
-
-	total = stack_a->size;
-	mid = (total + 1) / 2;
-	push_b(stack_a, stack_b, mid);
-	max_index_sort(stack_a);
-	back_a(stack_a, stack_b);
-}
-
-void	sort(t_stack *stack_a, t_stack *stack_b, int *c, int lenght)
-{
-	if (is_already_sorted(stack_a) == 0)
-	{
-		free(c);
-		free_stack(stack_a);
-		ft_error("Ya esta ordenado", TRUE);
-	}
-	else if (stack_a->size > 1)
-	{
-		turkish(stack_a, stack_b);
-		free(c);
+			reverse_rotate(stack, 'a', TRUE);
 	}
 	else
 	{
-		free(c);
-		free_stack(stack_a);
-		ft_error("Error\n", TRUE);
+		swap(stack, 'a', TRUE);
+		if (is_sorted(stack))
+			return ;
+		if (r < length - r)
+			rotate(stack, 'a', TRUE);
+		else
+			reverse_rotate(stack, 'a', TRUE);
+	}
+}
+
+void	s_insertion_sort(t_stack *stack_a, t_stack *stack_b, int length)
+{
+	int	min_index;
+	int	iter;
+	int	n;
+
+	iter = 0;
+	n = length;
+	while (iter++ < n - 3)
+	{
+		min_index = get_min_index(stack_a);
+		if (count_r(stack_a->head, min_index) <= n - min_index - \
+			count_r(stack_a->head, min_index))
+			while (stack_a->head->s_index != min_index)
+				rotate(stack_a, 'a', TRUE);
+		else
+			while (stack_a->head->s_index != min_index)
+				reverse_rotate(stack_a, 'a', TRUE);
+		if (is_sorted(stack_a) && stack_b->size == 0)
+			return ;
+		push(stack_a, stack_b, 'b', TRUE);
+		length--;
+	}
+	simple_sort(stack_a, length);
+	iter = 0;
+	while (iter++ < n - 3)
+		push(stack_b, stack_a, 'a', TRUE);
+}
+
+void	k_sort1(t_stack *stack_a, t_stack *stack_b, int length)
+{
+	int	i;
+	int	range;
+
+	i = 0;
+	range = ft_sqrt(length) * 14 / 10;
+	while (stack_a->head)
+	{
+		if (stack_a->head->s_index <= i)
+		{
+			push(stack_a, stack_b, 'b', TRUE);
+			i++;
+		}
+		else if (stack_a->head->s_index <= i + range)
+		{
+			push(stack_a, stack_b, 'b', TRUE);
+			i++;
+			if (!(stack_a->head->s_index <= i + range))
+				rotate_both(stack_a, stack_b);
+			else
+				rotate(stack_b, 'b', TRUE);
+		}
+		else
+			rotate(stack_a, 'a', TRUE);
+	}
+}
+
+void	k_sort2(t_stack *stack_a, t_stack *stack_b, int length)
+{
+	int	rb_count;
+	int	rrb_count;
+
+	while (length - 1 >= 0)
+	{
+		rb_count = count_r(stack_b->head, length - 1);
+		rrb_count = (length + 3) - rb_count;
+		if (rb_count <= rrb_count)
+		{
+			while (stack_b->head->s_index != length - 1)
+				rotate(stack_b, 'b', TRUE);
+			push(stack_b, stack_a, 'a', TRUE);
+			length--;
+		}
+		else
+		{
+			while (stack_b->head->s_index != length - 1)
+				reverse_rotate(stack_b, 'b', TRUE);
+			push(stack_b, stack_a, 'a', TRUE);
+			length--;
+		}
 	}
 }

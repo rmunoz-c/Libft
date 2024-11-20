@@ -35,11 +35,11 @@ void	push(t_stack *stack1, t_stack *stack2, char x, t_bool b)
 	int	index;
 	int	data;
 
-	if (stack2->head == NULL)
+	if (stack1->head == NULL)
 		return ;
-	index = stack2->head->s_index;
-	data = del_stack(stack2);
-	push_stack(stack1, index, data);
+	index = stack1->head->s_index;
+	data = del_stack(stack1);
+	push_stack(stack2, index, data);
 	if (b)
 	{
 		write(1, "p", 1);
