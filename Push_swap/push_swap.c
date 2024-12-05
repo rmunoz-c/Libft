@@ -51,9 +51,11 @@ int	main(int argc, char **argv)
 	if (count < 2 || check_repeated(c, count))
 	{
 		free (c);
-		if (count == 1 || count == 0)
+		if (!argv[0])
 			return (ft_putstr_fd("", 1), 0);
-		ft_error("Error\n", 1);
+		if (count == 1 || count == 0)
+			ft_error("Error\n", TRUE);
+		ft_error("Error\n", TRUE);
 	}
 	init_push_swap(&stack_a, &stack_b, c, count);
 	sort(&stack_a, &stack_b, c, count);

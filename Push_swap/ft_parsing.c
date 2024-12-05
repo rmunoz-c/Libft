@@ -25,7 +25,11 @@ int	check_digits(int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (!ft_isdigit(av[i][j]) && av[i][j] != ' ' && av[i][j] != '-')
+			if (!ft_isdigit(av[i][j]) && av[i][j] != ' ' && av[i][j] != '-'
+				&& av[i][j] != '+')
+				ft_error("Error\n", TRUE);
+			if (((av[i][j] == '-') && !ft_isdigit(av[i][j + 1])) 
+				|| ((av[i][j] == '+') && !ft_isdigit(av[i][j + 1])))
 				ft_error("Error\n", TRUE);
 			if (ft_isdigit(av[i][j]) && (av[i][j + 1] == ' '
 				|| av[i][j + 1] == '\0'))
