@@ -37,7 +37,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 	cp $(LIBFT) $(NAME)
 
-%.o: %.c ft_printf.h
+%.o: %.c push_swap.h
 	$(CC) $(CFLAGS) -o $@ $< -c
 
 clean:
