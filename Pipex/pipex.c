@@ -69,7 +69,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		pipe_fd[2];
 	pid_t	child;
-	int		i;
 
 	if (argc != 5)
 		ft_error("Error: Try with ./pipex infile cmd1 cmd2 outfile\n", TRUE);
@@ -80,9 +79,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_error ("Error forking process\n", TRUE);
 	if (!child)
 		child_process(argv, pipe_fd, envp);
-	i = -1;
-	while (++i < 2)
-		wait(NULL);
 	parent_process(argv, pipe_fd, envp);
 	return (0);
 }
