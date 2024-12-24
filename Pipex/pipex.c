@@ -17,9 +17,9 @@ int	open_file(char *file, size_t b)
 	int	n;
 
 	if (b == 0)
-		n = open(file, O_RDONLY, 0644);
+		n = open(file, O_RDONLY, 0777);
 	else if (b == 1)
-		n = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		n = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else
 		return (-1);
 	if (n == -1)
@@ -36,7 +36,7 @@ void	exec(char *cmd, char **envp)
 	path = ft_path(split_cmd[0], envp);
 	if (execve(path, split_cmd, envp) == -1)
 	{
-		ft_error("Error executing command\n", FALSE);
+		ft_putstr_fd("Error executing command\n", 2);
 		ft_putendl_fd(split_cmd[0], 2);
 		ft_free_array(split_cmd);
 		exit(EXIT_FAILURE);
@@ -46,16 +46,21 @@ void	exec(char *cmd, char **envp)
 void	child_process(char **argv, int *pipe_fd, char **envp)
 {
 	int	fd_in;
-	int fd_out;
 
 	fd_in = open_file(argv[1], 0);
 	dup2(fd_in, 0);
 	dup2(pipe_fd[1], 1);
 	close(pipe_fd[0]);
 	exec(argv[2], envp);
+}
+
+void	parent_process(char **argv, int *pipe_fd, char **envp)
+{
+	int	fd_out;
+
 	fd_out = open_file(argv[4], 1);
-	dup2(fd_out, 1);
 	dup2(pipe_fd[0], 0);
+	dup2(fd_out, 1);
 	close(pipe_fd[1]);
 	exec(argv[3], envp);
 }
@@ -64,27 +69,20 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		pipe_fd[2];
 	pid_t	child;
-	pid_t	child2;
 	int		i;
 
 	if (argc != 5)
 		ft_error("Error: Try with ./pipex infile cmd1 cmd2 outfile\n", TRUE);
-	if (pipe(pipe_fd) < 0)
+	if (pipe(pipe_fd) == -1)
 		ft_error("Error creating pipe\n", TRUE);
 	child = fork();
-	if (child < 0)
+	if (child == -1)
 		ft_error ("Error forking process\n", TRUE);
-	if (child == 0)
+	if (!child)
 		child_process(argv, pipe_fd, envp);
-	child2 = fork();
-	if (child2 < 0)
-		ft_error ("Error forking process\n", TRUE);
-	if (child2 == 0)
-		child_process(argv, pipe_fd, envp);
-	i = 0;
-	while (i < 2)
-	{
+	i = -1;
+	while (++i < 2)
 		wait(NULL);
-		i++;
-	}
+	parent_process(argv, pipe_fd, envp);
+	return (0);
 }
