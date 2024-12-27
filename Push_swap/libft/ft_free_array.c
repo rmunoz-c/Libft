@@ -16,6 +16,8 @@ void	ft_free_array(char **array)
 {
 	size_t	i;
 
+	if(!array)
+		return;
 	i = 0;
 	if (array)
 	{

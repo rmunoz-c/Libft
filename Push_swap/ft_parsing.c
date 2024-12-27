@@ -44,26 +44,16 @@ int	check_digits(int ac, char **av)
 int	check_limits(char **s, int n)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < n)
 	{
 		if (ft_strlen(s[i]) > 11 || ft_atoll(s[i]) > INT_MAX
 			|| ft_atoll(s[i]) < INT_MIN)
-		{
-			j = 0;
-			while (s[j])
-			{
-				free(s[j]);
-				j++;
-			}
-			free(s);
-			ft_error("Error\n", TRUE);
-		}
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	check_repeated(int *array, int len)
@@ -72,13 +62,16 @@ int	check_repeated(int *array, int len)
 	int	j;
 
 	i = 0;
-	while (i < len)
+	while (i < len - 1)
 	{
 		j = i + 1;
-		while (array[j])
+		while (j < len)
 		{
 			if (array[i] == array[j])
-				return (1);
+			{
+				free(array);
+				ft_error("Error\n", TRUE);
+			}
 			j++;
 		}
 		i++;
@@ -109,12 +102,12 @@ int	*parse_input(int ac, char **av, int count, int *len)
 	while (i < ac - 1)
 	{
 		args = ft_split (av[i++], ' ');
-		if (!args)
+		if (!args || check_limits(args, ft_arraylen(args)))
 		{
+			ft_free_array(args);
 			free(n);
 			ft_error("", 1);
 		}
-		check_limits(args, ft_arraylen(args));
 		j = 0;
 		while (args[j])
 		{
