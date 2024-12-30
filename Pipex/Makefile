@@ -26,14 +26,14 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ) pipex.h
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT) -o $(NAME) -g
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 	cp $(LIBFT) $(NAME)
 
 %.o: %.c pipex.h
-	$(CC) $(CFLAGS) -o $@ $< -c
+	$(CC) $(CFLAGS) -o $@ $< -c -g
 
 clean:
 	rm -f $(OBJ)

@@ -51,10 +51,12 @@ void	child_process(char **argv, int *pipe_fd, char **envp)
 	dup2(fd_in, 0);
 	dup2(pipe_fd[1], 1);
 	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	close(fd_in);
 	exec(argv[2], envp);
 }
 
-void	parent_process(char **argv, int *pipe_fd, char **envp)
+void	child2_process(char **argv, int *pipe_fd, char **envp)
 {
 	int	fd_out;
 
@@ -62,6 +64,8 @@ void	parent_process(char **argv, int *pipe_fd, char **envp)
 	dup2(pipe_fd[0], 0);
 	dup2(fd_out, 1);
 	close(pipe_fd[1]);
+	close(fd_out);
+	close(pipe_fd[0]);
 	exec(argv[3], envp);
 }
 
@@ -69,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		pipe_fd[2];
 	pid_t	child;
+	pid_t	child2;
 
 	if (argc != 5)
 		ft_error("Error: Try with ./pipex infile cmd1 cmd2 outfile\n", TRUE);
@@ -79,6 +84,14 @@ int	main(int argc, char **argv, char **envp)
 		ft_error ("Error forking process\n", TRUE);
 	if (!child)
 		child_process(argv, pipe_fd, envp);
-	parent_process(argv, pipe_fd, envp);
+	child2 = fork();
+	if (child2 == -1)
+		ft_error ("Error forking process\n", TRUE);
+	if (!child2)
+		child2_process(argv, pipe_fd, envp);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	wait(NULL);
+	wait(NULL);
 	return (0);
 }
