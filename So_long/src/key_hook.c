@@ -21,7 +21,7 @@ void	player_pos(t_game *game)
 		while (game->player_x < game->map.width)
 		{
 			if (game->map.map[game->player_y][game->player_x] == 'P')
-				break ;
+				return ;
 			game->player_x++;
 		}
 		if (game->map.map[game->player_y][game->player_x] == 'P')
@@ -34,17 +34,15 @@ void	player_pos(t_game *game)
 int	update_player(int keycode, t_game *game)
 {
 	player_pos(game);
-	if (keycode == ESC)
-		return (0);
-	else if (game->e == 1)
-		return (0);
-	else if(keycode == UP)
+	if (keycode == XK_Escape)
+		return (close_game(game));
+	else if (keycode == UP || keycode == XK_Up)
 		move_up(game);
-	else if(keycode == DOWN)
+	else if (keycode == DOWN || keycode == XK_Down)
 		move_down(game);
-	else if(keycode == LEFT)
+	else if (keycode == LEFT || keycode == XK_Left)
 		move_left(game);
-	else if(keycode == RIGHT)
+	else if (keycode == RIGHT || keycode == XK_Right)
 		move_right(game);
-	return (0);		
+	return (0);
 }

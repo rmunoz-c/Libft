@@ -28,7 +28,7 @@ SRC=		src/end_game.c \
 			src/movement.c \
 			src/path_finder.c \
 			src/read_map.c \
-			src/set_images.c
+			src/set_images.c \
 
 OBJ= $(SRC:.c=.o) 
 
@@ -56,6 +56,11 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+norm: 	
+	@norminette include
+	@norminette libft
+	@norminette $(SRC)
 
 .DEFAULT_GOAL: all
 
